@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+      http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+      http://www.springframework.org/schema/context  
+      http://www.springframework.org/schema/context/spring-context.xsd  
+      http://www.springframework.org/schema/aop 
+	  http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+      http://www.springframework.org/schema/mvc  
+      http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+	<!-- 使用注解驱动 -->
+	<mvc:annotation-driven/>
+
+	<!-- 定义扫描装载的包 -->
+	<context:component-scan base-package="com.jweb.*"/>
+
+	<!-- 视图解析类 -->
+	<bean id="viewResolver"
+		  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+				  value="org.springframework.web.servlet.view.JstlView" />
+		<property name="contentType" value="text/html" />
+		<property name="prefix" value="/WEB-INF/page/"></property>
+		<!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- 加载配置属性文件 -->
+	<context:property-placeholder
+			ignore-unresolvable="true" location="classpath:jweb.properties" />
+
+
+
+	<!-- 加载配置属性文件 -->
+
+	<!-- 配置使Spring采用CGLIB代理 -->
+	<!-- 当在web.xml 中 DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
+	<!-- 静态资源映射 -->
+	<!--<mvc:resources location="/WEB-INF/static/" mapping="/static/**" />
+	<mvc:resources location="/upload/" mapping="/upload/**" />-->
+	<!-- 静态资源访问，方案1 -->
+	<!-- <mvc:resources location="/img/" mapping="/img/**" /> -->
+	<!-- <mvc:resources location="/js/" mapping="/js/**" /> -->
+
+	<!-- 静态资源访问，方案2 -->
+	<!-- <mvc:default-servlet-handler/> -->
+
+
+	<!-- 开启注解方案1 -->
+	<!-- 注解方法处理 -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" 
+		/> -->
+	<!-- 注解类映射处理 -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"></bean> -->
+
+	<!-- 开启注解方案2 -->
+
+
+</beans>
